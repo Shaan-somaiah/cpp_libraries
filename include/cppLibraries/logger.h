@@ -1,20 +1,21 @@
-#ifndef LOGGER_H
-#define LOGGER_H
+#ifndef CPP_LIBRARIES_LOGGER_H
+#define CPP_LIBRARIES_LOGGER_H
 
 #include <string>
 #include <fstream>
 
 namespace cppLibraries {
+
     class Logger{
 
         private:
-            std::ofstream logFile;
+            std::ofstream m_log_file;
             // only log to file if filepath is passed while constructing LOGGER object
-            bool logToFile{false}; 
+            bool m_log_to_file{false}; 
 
         public:
             Logger();
-            Logger(const std::string& filePath);
+            Logger(const std::string& file_path);
             ~Logger();
 
             void LogInfo(const std::string& message);
@@ -23,4 +24,4 @@ namespace cppLibraries {
     };
 } // namespace cppLibraries
 
-#endif //LOGGER_H
+#endif //CPP_LIBRARIES_LOGGER_H

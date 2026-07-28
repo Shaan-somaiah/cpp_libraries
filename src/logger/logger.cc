@@ -5,36 +5,36 @@
 namespace cppLibraries {
     Logger::Logger() = default;
 
-    Logger::Logger(const std::string& filePath) : logFile(filePath){
-        logToFile = true;
-        if(!logFile){
+    Logger::Logger(const std::string& file_path) : m_log_file(file_path){
+        m_log_to_file = true;
+        if(!m_log_file){
             std::cout << "Unable to open log file!";
         }
     }
 
     Logger::~Logger(){
-        if(logFile.is_open()){
-            logFile.close();    
+        if(m_log_file.is_open()){
+            m_log_file.close();    
         }
     }
 
     void Logger::LogInfo(const std::string& message) {
-        if(logToFile){
-            logFile << "[INFO] " << message << "\n";
+        if(m_log_to_file){
+            m_log_file << "[INFO] " << message << "\n";
         }
         std::cout << "[INFO] " << message << "\n";
     }
 
     void Logger::LogWarning(const std::string& message) {
-        if(logToFile){
-            logFile << "[WARN] " << message << "\n";
+        if(m_log_to_file){
+            m_log_file << "[WARN] " << message << "\n";
         }
         std::cout << "[WARN] " << message << "\n";
     }
 
     void Logger::LogError(const std::string& message) {
-        if(logToFile){
-            logFile << "[ERRO] " << message << "\n";
+        if(m_log_to_file){
+            m_log_file << "[ERRO] " << message << "\n";
         }
         std::cout << "[ERRO] " << message << "\n";
     }

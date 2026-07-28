@@ -1,22 +1,19 @@
-## Compiler options for gcc
+add_library(project_options INTERFACE)
+add_library(project_warnings INTERFACE)
 
-add_library(cppLibrary_options INTERFACE)
+target_compile_features(project_options INTERFACE cxx_std_17)
 
-## Targetting c++ 17 for compatability 
-target_compile_features(cppLibrary_options INTERFACE cxx_std_17)
-
-## Encforce extra compile time failuires for learning
-target_compile_options(cppLibrary_options INTERFACE
-    -Wall
-    -Wextra
-    -Wpedantic
-    -Weffc++
-    -Wconversion
-    -Wsign-conversion
+target_compile_options(project_warnings
+    INTERFACE
+       -Wall
+       -Wextra
+       -Wpedantic
+       -Wconversion
+       -Wsign-conversion
 )
 
 # Debug-only flags
-target_compile_options(cppLibrary_options INTERFACE
+target_compile_options(project_options INTERFACE
     $<$<CONFIG:Debug>:-ggdb>
 )
 

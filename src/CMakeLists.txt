@@ -1,11 +1,35 @@
-add_library(cppLibraries)
+set(CORE_LIB_NAME ${PROJECT_NAME}_core)
 
-target_link_libraries(cppLibraries PUBLIC cppLibrary_options)
+add_library(${CORE_LIB_NAME} STATIC)
+add_library(cpp_libraries::core ALIAS ${CORE_LIB_NAME})
 
-target_include_directories(cppLibraries
+target_link_libraries(
+    ${CORE_LIB_NAME} 
+    PUBLIC project_options
+    PRIVATE project_warnings
+)
+
+## Optional dependencies 
+if(USE_GFLAGS)
+    target_link_libraries(${CORE_LIB_NAME}
+        PRIVATE
+            gflags
+    )
+endif()
+
+if(USE_GLOG)
+    target_link_libraries(${CORE_LIB_NAME}
+        PRIVATE
+            glog::glog
+    )
+endif()
+
+## Include directories
+target_include_directories(${CORE_LIB_NAME}
   PUBLIC
     $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
     $<INSTALL_INTERFACE:include>
 )
 
+## Source subdirectories
 add_subdirectory(logger)
