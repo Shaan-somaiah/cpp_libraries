@@ -33,3 +33,4 @@ target_include_directories(${CORE_LIB_NAME}
 
 ## Source subdirectories
 add_subdirectory(logger)
+add_subdirectory(thread_pool)
