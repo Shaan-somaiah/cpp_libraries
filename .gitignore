@@ -19,3 +19,5 @@ compile_commands.json
 ## Debug info
 *.dSYM/
 
+## IDE settings
+.vs*
