@@ -8,10 +8,17 @@ int main() {
 
     LinkedList.PushFront(100);
 
-    std::cout << LinkedList.GetLength() << "\n";
 
     LinkedList.PushFront(15);
 
-    std::cout << LinkedList.GetLength() << "\n";
+
+    LinkedList.PushBack(55);
+
+
+    for (size_t i=0; i < LinkedList.GetLength(); i++) {
+        std::cout << LinkedList.PopFront() << "\n";
+    }
+
+    std::cout << "Length of LL now : " << LinkedList.GetLength() << "\n"; 
 
 }
