@@ -1,9 +1,6 @@
-#include <cppLibraries/logger.h>
+#include <cppLibraries/data_structures/linked_list.h>
 
+namespace ds = cppLibraries::dataStructure;
 int main() {
-
-    cppLibraries::Logger i_logger("/tmp/logTest");
-    i_logger.LogError("Error");
-    i_logger.LogWarning("Warning");
-    i_logger.LogInfo("Info");
+    ds::LinkedList<int> LinkedList;
 }
