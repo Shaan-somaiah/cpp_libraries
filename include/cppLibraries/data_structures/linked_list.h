@@ -2,9 +2,6 @@
 #define CPP_LIBRARIES_DS_LINKED_LIST_H
 
 #include <cstddef>
-// Remove in release
-#include <iostream>
-
 
 namespace cppLibraries { namespace dataStructure {
 
@@ -89,10 +86,26 @@ template <typename T> void ds::LinkedList<T>::PushBack(T data) {
 }
 
 template <typename T> T ds::LinkedList<T>::PopFront() {
+    
+    T data = m_head->m_data;
+    Node* tmpptr = m_head;
+    m_head = m_head->m_next;
 
+    free(tmpptr);
+
+    return data;
 }
 
 template <typename T> T ds::LinkedList<T>::PopBack() {
+
+//     T data = m_tail->m_data;
+//     Node* tmpptr = m_tail;
+
+//     // Need to figure out a easy way get tail - 1th node
+
+//     free(tmpptr)
+
+//     return data;
 
 }
 
