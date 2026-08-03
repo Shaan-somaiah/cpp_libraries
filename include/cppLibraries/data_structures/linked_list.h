@@ -58,6 +58,7 @@ template <typename T> void ds::LinkedList<T>::PushFront(T data) {
     if(m_head == nullptr) {
         node->m_next = nullptr;
         m_head = node;
+        m_tail = node;
     }
     else {
         node->m_next = m_head;
@@ -68,7 +69,23 @@ template <typename T> void ds::LinkedList<T>::PushFront(T data) {
 }
 
 template <typename T> void ds::LinkedList<T>::PushBack(T data) {
+    
+    Node* node = new Node;
+    node->m_data = data;
 
+    // first node addition
+    if(m_head == nullptr) {
+        node->m_next = nullptr;
+        m_head = node;
+        m_tail = node;
+    }
+    else {
+        node->m_next = nullptr;
+        m_tail->m_next = node;
+        m_tail = node;
+    }
+
+    m_length++;
 }
 
 template <typename T> T ds::LinkedList<T>::PopFront() {
