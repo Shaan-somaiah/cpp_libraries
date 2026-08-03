@@ -49,6 +49,20 @@ template <typename T> ds::LinkedList<T>::~LinkedList() {
 
 template <typename T> void ds::LinkedList<T>::PushFront(T data) {
 
+    Node node;
+    node.m_data = data;
+
+    // first node addition
+    if(m_head == nullptr) {
+        node.m_next = nullptr;
+        m_head = &node;
+    }
+    else {
+        node.m_next = m_head;
+        m_head = &node;
+    }
+
+    m_length++;
 }
 
 template <typename T> void ds::LinkedList<T>::PushBack(T data) {
@@ -64,7 +78,7 @@ template <typename T> T ds::LinkedList<T>::PopBack() {
 }
 
 template <typename T> size_t ds::LinkedList<T>::GetLength() const {
-
+    return m_length;
 }
 
 #endif // CPP_LIBRARIES_DS_LINKED_LIST_H
