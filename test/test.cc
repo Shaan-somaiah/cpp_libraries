@@ -8,5 +8,10 @@ int main() {
 
     LinkedList.PushFront(100);
 
-    std::cout << LinkedList.GetLength();
+    std::cout << LinkedList.GetLength() << "\n";
+
+    LinkedList.PushFront(15);
+
+    std::cout << LinkedList.GetLength() << "\n";
+
 }

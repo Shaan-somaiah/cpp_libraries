@@ -45,21 +45,23 @@ template <typename T> ds::LinkedList<T>::LinkedList() {
 }
 
 template <typename T> ds::LinkedList<T>::~LinkedList() {
+
+    // free all the nodes
 }
 
 template <typename T> void ds::LinkedList<T>::PushFront(T data) {
 
-    Node node;
-    node.m_data = data;
+    Node* node = new Node;
+    node->m_data = data;
 
     // first node addition
     if(m_head == nullptr) {
-        node.m_next = nullptr;
-        m_head = &node;
+        node->m_next = nullptr;
+        m_head = node;
     }
     else {
-        node.m_next = m_head;
-        m_head = &node;
+        node->m_next = m_head;
+        m_head = node;
     }
 
     m_length++;
