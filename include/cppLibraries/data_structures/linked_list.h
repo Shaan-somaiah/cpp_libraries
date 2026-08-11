@@ -29,6 +29,8 @@ namespace cppLibraries { namespace dataStructure {
                 T PopBack();
 
                 size_t GetLength() const;
+
+                bool Exists(T data) const;
             };
 
     } // namespace dataStructure
@@ -93,6 +95,8 @@ template <typename T> T ds::LinkedList<T>::PopFront() {
 
     free(tmpptr);
 
+    m_length--;
+    
     return data;
 }
 
@@ -111,6 +115,28 @@ template <typename T> T ds::LinkedList<T>::PopBack() {
 
 template <typename T> size_t ds::LinkedList<T>::GetLength() const {
     return m_length;
+}
+
+template <typename T> bool ds::LinkedList<T>::Exists(T data) const {
+    
+    // early return if linked list is empty
+    if(m_length == 0){
+        return false;
+    }
+
+    Node* tmpptr = m_head;
+
+    for (int i=1; i<=m_length;i++) {
+
+        if(tmpptr->m_data == data) {
+            return true;
+        } 
+
+        tmpptr = tmpptr->m_next;
+    }
+
+    return false;
+
 }
 
 #endif // CPP_LIBRARIES_DS_LINKED_LIST_H
