@@ -66,7 +66,6 @@ template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
 
     m_length++;
 
-    free(tmpptr);
 }
 
 template <typename T> void ds::DoubleLinkedList<T>::PushBack(T data) {
