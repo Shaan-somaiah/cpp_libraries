@@ -61,6 +61,7 @@ template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
     }
 
     tmpptr->m_next = m_head;
+    tmpptr->m_prev = nullptr;
     m_head->m_prev = tmpptr;
     m_head = tmpptr;
 
