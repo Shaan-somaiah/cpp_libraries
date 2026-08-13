@@ -89,6 +89,12 @@ template <typename T> void ds::LinkedList<T>::PushBack(T data) {
 
 template <typename T> T ds::LinkedList<T>::PopFront() {
     
+    // what do I return when the LL is empty?
+    // need to look into std::optional
+    // if(m_length == 0 ) {
+    //    
+    // }
+
     T data = m_head->m_data;
     Node* tmpptr = m_head;
     m_head = m_head->m_next;
@@ -96,7 +102,7 @@ template <typename T> T ds::LinkedList<T>::PopFront() {
     free(tmpptr);
 
     m_length--;
-    
+
     return data;
 }
 
