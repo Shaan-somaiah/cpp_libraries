@@ -70,7 +70,25 @@ template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
 }
 
 template <typename T> void ds::DoubleLinkedList<T>::PushBack(T data) {
-    
+
+    Node* tmpptr = new Node;
+
+    // first node
+    if(m_length == 0) {
+        tmpptr->m_data = data;
+        m_head = tmpptr;
+        m_tail = tmpptr;
+        tmpptr->m_next = nullptr;
+        tmpptr->m_prev = nullptr;
+    }
+
+    m_tail->m_next = tmpptr;
+    tmpptr->m_next = nullptr;
+    tmpptr->m_prev = m_tail;
+    m_tail = tmpptr;
+
+    m_length++;
+
 }
 
 template <typename T> T ds::DoubleLinkedList<T>::PopFront() {
