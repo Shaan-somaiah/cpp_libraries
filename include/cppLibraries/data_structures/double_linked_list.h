@@ -92,7 +92,23 @@ template <typename T> void ds::DoubleLinkedList<T>::PushBack(T data) {
 }
 
 template <typename T> T ds::DoubleLinkedList<T>::PopFront() {
-    
+
+    // what do I return when the LL is empty?
+    // need to look into std::optional
+    // if(m_length == 0 ) {
+    //    
+    // }
+
+    T data  = m_head->m_data;
+
+    Node* tmpptr = m_head;
+    m_head = tmpptr->m_next;
+    m_head->m_prev = nullptr;
+
+    free(tmpptr);
+    m_length--;
+
+    return data;
 }
 
 template <typename T> T ds::DoubleLinkedList<T>::PopBack() {
