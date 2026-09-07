@@ -46,7 +46,14 @@ template <typename T> ds::LinkedList<T>::LinkedList() {
 
 template <typename T> ds::LinkedList<T>::~LinkedList() {
 
-    // free all the nodes
+    Node* tmpptr = m_head;
+
+    while(tmpptr != nullptr) {
+        m_head = m_head->m_next;
+        delete (tmpptr);
+        tmpptr = m_head;
+    }
+
 }
 
 template <typename T> void ds::LinkedList<T>::PushFront(T data) {
