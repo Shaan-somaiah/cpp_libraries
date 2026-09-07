@@ -155,13 +155,13 @@ template <typename T> size_t ds::LinkedList<T>::GetLength() const {
 template <typename T> bool ds::LinkedList<T>::Exists(T data) const {
     
     // early return if linked list is empty
-    if(m_length == 0){
+    if(m_head == nullptr){
         return false;
     }
 
-    Node* tmpptr = m_head;
+    const Node* tmpptr = m_head;
 
-    for (int i=1; i<=m_length;i++) {
+    while (tmpptr != nullptr) {
 
         if(tmpptr->m_data == data) {
             return true;
