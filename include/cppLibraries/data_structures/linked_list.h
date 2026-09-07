@@ -2,6 +2,7 @@
 #define CPP_LIBRARIES_DS_LINKED_LIST_H
 
 #include <cstddef>
+#include <optional>
 
 namespace cppLibraries { namespace dataStructure {
 
@@ -25,8 +26,8 @@ namespace cppLibraries { namespace dataStructure {
                 void PushFront(T data);
                 void PushBack(T data);
 
-                T PopFront();
-                T PopBack();
+                std::optional<T> PopFront();
+                std::optional<T> PopBack();
 
                 size_t GetLength() const;
 
@@ -87,26 +88,29 @@ template <typename T> void ds::LinkedList<T>::PushBack(T data) {
     m_length++;
 }
 
-template <typename T> T ds::LinkedList<T>::PopFront() {
+template <typename T> std::optional<T> ds::LinkedList<T>::PopFront() {
     
-    // what do I return when the LL is empty?
-    // need to look into std::optional
-    // if(m_length == 0 ) {
-    //    
-    // }
+    // handle empty list
+    if(m_head == nullptr) {
+        return std::nullopt;
+    }
 
     T data = m_head->m_data;
     Node* tmpptr = m_head;
     m_head = m_head->m_next;
 
-    free(tmpptr);
+    if(m_head == nullptr) {
+        m_tail = nullptr;
+    }
+
+    delete(tmpptr);
 
     m_length--;
 
     return data;
 }
 
-template <typename T> T ds::LinkedList<T>::PopBack() {
+template <typename T> std::optional<T> ds::LinkedList<T>::PopBack() {
 
 //     T data = m_tail->m_data;
 //     Node* tmpptr = m_tail;
