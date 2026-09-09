@@ -160,6 +160,23 @@ template <typename T> size_t ds::DoubleLinkedList<T>::GetLength() const {
     return m_length;
 }
 template <typename T> bool ds::DoubleLinkedList<T>::Exists(T data) {
+
+    // early return if linked list is empty
+    if(m_head == nullptr){
+        return false;
+    }
+
+    const Node* tmpptr = m_head;
+
+    while (tmpptr != nullptr) {
+
+        if(tmpptr->m_data == data) {
+            return true;
+        } 
+
+        tmpptr = tmpptr->m_next;
+    }
+
     return false;
 }
 
