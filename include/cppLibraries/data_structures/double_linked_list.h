@@ -2,6 +2,7 @@
 #define CPP_LIBRARIES_DS_DOUBLE_LINKED_LIST_H
 
 #include <cstddef>
+#include <optional>
 
 namespace cppLibraries { namespace dataStructure {
 
@@ -26,8 +27,8 @@ namespace cppLibraries { namespace dataStructure {
             void PushFront(T data);
             void PushBack(T data);
 
-            T PopFront();
-            T PopBack();
+            std::optional<T> PopFront();
+            std::optional<T> PopBack();
 
             size_t GetLength();
 
@@ -91,28 +92,60 @@ template <typename T> void ds::DoubleLinkedList<T>::PushBack(T data) {
 
 }
 
-template <typename T> T ds::DoubleLinkedList<T>::PopFront() {
+template <typename T> std::optional<T> ds::DoubleLinkedList<T>::PopFront() {
 
-    // what do I return when the LL is empty?
-    // need to look into std::optional
-    // if(m_length == 0 ) {
-    //    
-    // }
-
+    // Handle empty list
+    if(m_head == nullptr) {
+        return std::nullopt;
+    }
+    
     T data  = m_head->m_data;
-
     Node* tmpptr = m_head;
-    m_head = tmpptr->m_next;
+
+    // Handle single node
+    if(m_head == m_tail) {
+        m_head = nullptr;
+        m_tail = nullptr;
+        delete(tmpptr);
+        m_length--;
+        return data;
+    }
+
+    m_head = m_head->m_next;
     m_head->m_prev = nullptr;
 
-    free(tmpptr);
+    delete(tmpptr);
     m_length--;
 
     return data;
 }
 
-template <typename T> T ds::DoubleLinkedList<T>::PopBack() {
+template <typename T> std::optional<T> ds::DoubleLinkedList<T>::PopBack() {
+
+    // Handle empty list
+    if(m_head == nullptr) {
+        return std::nullopt;
+    }
     
+    T data  = m_tail->m_data;
+    Node* tmpptr = m_tail;
+
+    // Handle single node
+    if(m_head == m_tail) {
+        m_head = nullptr;
+        m_tail = nullptr;
+        delete(tmpptr);
+        m_length--;
+        return data;
+    }
+
+    m_tail = m_tail->m_prev;
+    m_tail->m_next = nullptr;
+
+    delete(tmpptr);
+    m_length--;
+
+    return data;
 }
 
 template <typename T> size_t ds::DoubleLinkedList<T>::GetLength() {
