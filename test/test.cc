@@ -14,10 +14,14 @@ int main() {
 
     LinkedList.PushBack(55);
 
+    LinkedList.PopBack();
 
-    for (size_t i=0; i < LinkedList.GetLength(); i++) {
-        std::cout << LinkedList.PopFront() << "\n";
-    }
+    LinkedList.PopFront();
+
+
+    LinkedList.PopFront();
+    LinkedList.PopFront();
+    LinkedList.PopFront();
 
     std::cout << "Length of LL now : " << LinkedList.GetLength() << "\n"; 
 
