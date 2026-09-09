@@ -24,6 +24,9 @@ namespace cppLibraries { namespace dataStructure {
             DoubleLinkedList();
             ~DoubleLinkedList();
 
+            DoubleLinkedList(const DoubleLinkedList&) = delete;
+            DoubleLinkedList& operator=(const DoubleLinkedList&) = delete;
+
             void PushFront(T data);
             void PushBack(T data);
 
