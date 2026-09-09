@@ -30,7 +30,7 @@ namespace cppLibraries { namespace dataStructure {
             std::optional<T> PopFront();
             std::optional<T> PopBack();
 
-            size_t GetLength();
+            size_t GetLength() const;
 
             bool Exists(T data);
     };
@@ -148,7 +148,7 @@ template <typename T> std::optional<T> ds::DoubleLinkedList<T>::PopBack() {
     return data;
 }
 
-template <typename T> size_t ds::DoubleLinkedList<T>::GetLength() {
+template <typename T> size_t ds::DoubleLinkedList<T>::GetLength() const {
     return m_length;
 }
 template <typename T> bool ds::DoubleLinkedList<T>::Exists(T data) {
