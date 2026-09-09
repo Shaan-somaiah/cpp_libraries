@@ -59,23 +59,23 @@ template <typename T> ds::DoubleLinkedList<T>::~DoubleLinkedList() {
 template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
     
     Node* tmpptr = new Node;
+    tmpptr->m_data = data;
 
     // first node
-    if(m_length == 0) {
-        tmpptr->m_data = data;
+    if(m_head == nullptr) {
         m_head = tmpptr;
         m_tail = tmpptr;
         tmpptr->m_next = nullptr;
         tmpptr->m_prev = nullptr;
     }
-
-    tmpptr->m_next = m_head;
-    tmpptr->m_prev = nullptr;
-    m_head->m_prev = tmpptr;
-    m_head = tmpptr;
+    else {
+        tmpptr->m_next = m_head;
+        tmpptr->m_prev = nullptr;
+        m_head->m_prev = tmpptr;
+        m_head = tmpptr;
+    }
 
     m_length++;
-
 }
 
 template <typename T> void ds::DoubleLinkedList<T>::PushBack(T data) {
