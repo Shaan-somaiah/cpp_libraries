@@ -23,6 +23,9 @@ namespace cppLibraries { namespace dataStructure {
                 LinkedList();
                 ~LinkedList();
 
+                LinkedList(const LinkedList&) = delete;
+                LinkedList& operator=(const LinkedList&) = delete;
+
                 void PushFront(T data);
                 void PushBack(T data);
 
