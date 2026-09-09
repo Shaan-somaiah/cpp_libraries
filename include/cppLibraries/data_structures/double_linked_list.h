@@ -45,7 +45,15 @@ template <typename T> ds::DoubleLinkedList<T>::DoubleLinkedList() {
 }
 
 template <typename T> ds::DoubleLinkedList<T>::~DoubleLinkedList() {
-    // free all mem
+    
+    Node* tmpptr = m_head;
+
+    while(tmpptr != nullptr) {
+        m_head = m_head->m_next;
+        delete (tmpptr);
+        tmpptr = m_head;
+    }
+
 }
 
 template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
