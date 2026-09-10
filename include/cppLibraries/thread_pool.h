@@ -30,19 +30,19 @@ namespace cppLibraries {
         private: 
             std::size_t m_worker_count = 0;
 
-            Queue queue;
+            Queue m_queue;
 
         public:
             
             // Create worker_count no of threads and put them to sleep?
-            explicit ThreadPool(int worker_count);
+            explicit ThreadPool(std::size_t worker_count);
 
             ~ThreadPool();
 
             // Submit work to the queue, notify worker to check the queue for work?
             // construct Work Object from passed in callable
             void SubmitWork(/* work */);
-            
+
     };
 
 } // namespace cppLibraries
