@@ -2,34 +2,47 @@
 #define CPP_LIBRARIES_THREAD_POOL_H
 
 #include <functional>
+#include <cstddef>
+#include "cppLibraries/data_structures/double_linked_list.h"
 
 namespace cppLibraries {
 
+    // Unit of work that will be pushed onto the queue
+    class Work {
+
+        private:
+            std::function<void()> m_callable;
+            int m_priority;
+            int m_task_id;
+    };
+
+    // Each thread waits on Queue, contains Work
+    class Queue {
+
+        private:
+            dataStructure::DoubleLinkedList<Work> m_queue;
+    };
+    
+    
+    // Public API
     class ThreadPool {
 
         private: 
-            int m_worker_count;
+            std::size_t m_worker_count = 0;
 
-            struct m_work {
-                std::function<void()> m_callback;
-                int m_priority;
-                int task_id;
-                
-            };
-
-            // Need to create a DS library to implement basic LL featureset
-            // LinkedList<m_work> m_queue;
-
-            void WorkerLoop();
+            Queue queue;
 
         public:
-            ThreadPool() = delete;
-            ThreadPool(int workercount);
+            
+            // Create worker_count no of threads and put them to sleep?
+            explicit ThreadPool(int worker_count);
 
             ~ThreadPool();
 
+            // Submit work to the queue, notify worker to check the queue for work?
+            // construct Work Object from passed in callable
+            void SubmitWork(/* work */);
             
-
     };
 
 } // namespace cppLibraries
