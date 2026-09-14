@@ -10,6 +10,12 @@ namespace cppLibraries {
     // Unit of work that will be pushed onto the queue
     class Work {
 
+        public:
+            explicit Work(std::function<void()> callable, int priority, int task_id);
+            ~Work();
+
+            void Execute();
+
         private:
             std::function<void()> m_callable;
             int m_priority;
