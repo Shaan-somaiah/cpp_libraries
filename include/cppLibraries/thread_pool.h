@@ -59,6 +59,9 @@ namespace cppLibraries {
             // construct Work Object from passed in callable
             void Add(std::function<void()> callable);
 
+
+            void TestExec();
+
     };
 
 } // namespace cppLibraries

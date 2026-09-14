@@ -1,28 +1,19 @@
 #include <iostream>
-#include "cppLibraries/data_structures/linked_list.h"
+#include "cppLibraries/thread_pool.h"
+
+void test() {
+    std::cout << "INSIDE TEST!!!!\n";
+    return;
+}
 
 
-namespace ds = cppLibraries::dataStructure;
 int main() {
-    ds::LinkedList<int> LinkedList;
 
-    LinkedList.PushFront(100);
+    cppLibraries::ThreadPool t_pool(5);
 
+    t_pool.Add(&test);
 
-    LinkedList.PushFront(15);
+    t_pool.TestExec();
 
-
-    LinkedList.PushBack(55);
-
-    LinkedList.PopBack();
-
-    LinkedList.PopFront();
-
-
-    LinkedList.PopFront();
-    LinkedList.PopFront();
-    LinkedList.PopFront();
-
-    std::cout << "Length of LL now : " << LinkedList.GetLength() << "\n"; 
 
 }

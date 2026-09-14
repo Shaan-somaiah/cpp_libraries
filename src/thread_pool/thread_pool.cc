@@ -57,5 +57,14 @@ namespace cppLibraries
         m_queue.Push(work);
     }
 
+    void ThreadPool::TestExec() {
+        
+        std::optional<Work> work = m_queue.Pop();
+
+        if (work.has_value()) {
+            work->Execute();
+        }
+    }
+
 
 } // namespace cppLibraries
