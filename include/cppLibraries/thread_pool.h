@@ -3,6 +3,7 @@
 
 #include <functional>
 #include <cstddef>
+#include <optional>
 #include "cppLibraries/data_structures/double_linked_list.h"
 
 namespace cppLibraries {
@@ -28,6 +29,7 @@ namespace cppLibraries {
         public:
             // copy for now, will look into std::move later
             void Push(Work work);
+            std::optional<Work> Pop();
 
         private:
             dataStructure::DoubleLinkedList<Work> m_queue;

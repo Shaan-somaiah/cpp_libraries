@@ -1,5 +1,6 @@
 #include <functional>
 #include <cstddef>
+#include <optional>
 #include "cppLibraries/thread_pool.h"
 
 
@@ -25,6 +26,10 @@ namespace cppLibraries
 
     void Queue::Push(Work work) {
         m_queue.PushBack(work);
+    }
+
+    std::optional<Work> Queue::Pop() {
+        return m_queue.PopFront();
     }
 
     ThreadPool::ThreadPool(size_t worker_count) :
