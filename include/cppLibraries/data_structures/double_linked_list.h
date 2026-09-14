@@ -61,8 +61,7 @@ template <typename T> ds::DoubleLinkedList<T>::~DoubleLinkedList() {
 
 template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
     
-    Node* tmpptr = new Node;
-    tmpptr->m_data = data;
+    Node* tmpptr = new Node{data};
 
     // first node
     if(m_head == nullptr) {
@@ -83,8 +82,7 @@ template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
 
 template <typename T> void ds::DoubleLinkedList<T>::PushBack(T data) {
 
-    Node* tmpptr = new Node;
-    tmpptr->m_data = data;
+    Node* tmpptr = new Node{data};
 
     // first node
     if(m_head == nullptr) {
