@@ -25,6 +25,10 @@ namespace cppLibraries {
     // Each thread waits on Queue, contains Work
     class Queue {
 
+        public:
+            // copy for now, will look into std::move later
+            void Push(Work work);
+
         private:
             dataStructure::DoubleLinkedList<Work> m_queue;
     };

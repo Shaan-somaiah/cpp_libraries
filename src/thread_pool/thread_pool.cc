@@ -23,4 +23,8 @@ namespace cppLibraries
         m_callable();
     }
 
+    void Queue::Push(Work work) {
+        m_queue.PushBack(work);
+    }
+
 } // namespace cppLibraries
