@@ -12,8 +12,8 @@ namespace cppLibraries { namespace dataStructure {
 
                 struct Node
                 {
-                    Node *m_next = nullptr;
                     T m_data;
+                    Node *m_next = nullptr;
                 };
 
                 Node *m_head = nullptr;
@@ -61,8 +61,7 @@ template <typename T> ds::LinkedList<T>::~LinkedList() {
 
 template <typename T> void ds::LinkedList<T>::PushFront(T data) {
 
-    Node* node = new Node;
-    node->m_data = data;
+    Node* node = new Node{data};
 
     // first node addition
     if(m_head == nullptr) {
@@ -80,8 +79,7 @@ template <typename T> void ds::LinkedList<T>::PushFront(T data) {
 
 template <typename T> void ds::LinkedList<T>::PushBack(T data) {
     
-    Node* node = new Node;
-    node->m_data = data;
+    Node* node = new Node{data};
 
     // first node addition
     if(m_head == nullptr) {
