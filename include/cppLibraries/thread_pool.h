@@ -42,6 +42,10 @@ namespace cppLibraries {
 
             Queue m_queue;
 
+            int m_task_id = 0;
+
+            Work CreateWork(std::function<void()> callable);
+
         public:
             
             // Create worker_count no of threads and put them to sleep?
@@ -51,7 +55,7 @@ namespace cppLibraries {
 
             // Submit work to the queue, notify worker to check the queue for work?
             // construct Work Object from passed in callable
-            void SubmitWork(/* work */);
+            void Add(std::function<void()> callable);
 
     };
 
