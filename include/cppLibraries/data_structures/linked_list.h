@@ -23,8 +23,11 @@ namespace cppLibraries { namespace dataStructure {
                 LinkedList();
                 ~LinkedList();
 
-                LinkedList(const LinkedList&);
-                LinkedList& operator=(const LinkedList&);
+                LinkedList(const LinkedList& other);
+                LinkedList& operator=(const LinkedList& other);
+
+                LinkedList(LinkedList&& other);
+                LinkedList& operator=(LinkedList&& other);
 
                 void PushFront(T data);
                 void PushBack(T data);
@@ -96,6 +99,43 @@ template <typename T> ds::LinkedList<T>& ds::LinkedList<T>::operator=(const Link
 
     return *this;
 
+}
+
+template <typename T> ds::LinkedList<T>::LinkedList(LinkedList&& other) {
+
+    this->m_head = other.m_head;
+    this->m_tail = other.m_tail;
+    this->m_length = other.m_length;
+
+    other.m_head = nullptr;
+    other.m_tail = nullptr;
+    other.m_length = 0;
+
+}
+
+template <typename T> ds::LinkedList<T>& ds::LinkedList<T>::operator=(LinkedList&& other) {
+
+    if (this == &other) {
+        return *this;
+    }
+
+    Node* tmpptr = this->m_head;
+
+    while(tmpptr != nullptr) {
+        this->m_head = this->m_head->m_next;
+        delete (tmpptr);
+        tmpptr = this->m_head;
+    }
+
+    this->m_head = other.m_head;
+    this->m_tail = other.m_tail;
+    this->m_length = other.m_length;
+
+    other.m_head = nullptr;
+    other.m_tail = nullptr;
+    other.m_length = 0;
+
+    return *this;
 }
 
 template <typename T> void ds::LinkedList<T>::PushFront(T data) {
