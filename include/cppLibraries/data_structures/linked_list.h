@@ -23,7 +23,7 @@ namespace cppLibraries { namespace dataStructure {
                 LinkedList();
                 ~LinkedList();
 
-                LinkedList(const LinkedList&) = delete;
+                LinkedList(const LinkedList&);
                 LinkedList& operator=(const LinkedList&) = delete;
 
                 void PushFront(T data);
@@ -58,6 +58,18 @@ template <typename T> ds::LinkedList<T>::~LinkedList() {
     }
 
 }
+
+
+template <typename T> ds::LinkedList<T>::LinkedList(const LinkedList& other) {
+
+    Node* tmpptr = other.m_head;
+
+    while (tmpptr != nullptr) {
+        this->PushBack(tmpptr->m_data);
+        tmpptr = tmpptr->m_next;
+    }
+}
+
 
 template <typename T> void ds::LinkedList<T>::PushFront(T data) {
 
