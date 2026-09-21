@@ -24,7 +24,7 @@ namespace cppLibraries { namespace dataStructure {
             DoubleLinkedList();
             ~DoubleLinkedList();
 
-            DoubleLinkedList(const DoubleLinkedList&) = delete;
+            DoubleLinkedList(const DoubleLinkedList& other);
             DoubleLinkedList& operator=(const DoubleLinkedList&) = delete;
 
             void PushFront(T data);
@@ -57,6 +57,16 @@ template <typename T> ds::DoubleLinkedList<T>::~DoubleLinkedList() {
         tmpptr = m_head;
     }
 
+}
+
+template <typename T> ds::DoubleLinkedList<T>::DoubleLinkedList(const DoubleLinkedList& other) {
+
+    Node* tmpptr = other.m_head;
+
+    while(tmpptr != nullptr) {
+        this->PushBack(tmpptr->m_data);
+        tmpptr = tmpptr->m_next;
+    }
 }
 
 template <typename T> void ds::DoubleLinkedList<T>::PushFront(T data) {
