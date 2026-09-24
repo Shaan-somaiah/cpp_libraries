@@ -29,15 +29,15 @@ namespace cppLibraries { namespace dataStructure {
                 LinkedList(LinkedList&& other);
                 LinkedList& operator=(LinkedList&& other);
 
-                void PushFront(T data);
-                void PushBack(T data);
+                void PushFront(const T& data);
+                void PushBack(const T& data);
 
                 std::optional<T> PopFront();
                 std::optional<T> PopBack();
 
                 size_t GetLength() const;
 
-                bool Exists(T data) const;
+                bool Exists(const T& data) const;
             };
 
     } // namespace dataStructure
@@ -138,7 +138,7 @@ template <typename T> ds::LinkedList<T>& ds::LinkedList<T>::operator=(LinkedList
     return *this;
 }
 
-template <typename T> void ds::LinkedList<T>::PushFront(T data) {
+template <typename T> void ds::LinkedList<T>::PushFront(const T& data) {
 
     Node* node = new Node{data};
 
@@ -156,7 +156,7 @@ template <typename T> void ds::LinkedList<T>::PushFront(T data) {
     m_length++;
 }
 
-template <typename T> void ds::LinkedList<T>::PushBack(T data) {
+template <typename T> void ds::LinkedList<T>::PushBack(const T& data) {
     
     Node* node = new Node{data};
 
@@ -239,7 +239,7 @@ template <typename T> size_t ds::LinkedList<T>::GetLength() const {
     return m_length;
 }
 
-template <typename T> bool ds::LinkedList<T>::Exists(T data) const {
+template <typename T> bool ds::LinkedList<T>::Exists(const T& data) const {
     
     // early return if linked list is empty
     if(m_head == nullptr){
