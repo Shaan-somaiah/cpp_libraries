@@ -3,5 +3,6 @@ target_sources(${CORE_LIB_NAME}
         thread_pool.cc
         work.cc
         queue.cc
+        thread_pool_impl.cc
 )
 
