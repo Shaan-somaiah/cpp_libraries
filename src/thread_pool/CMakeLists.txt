@@ -1,4 +1,7 @@
 target_sources(${CORE_LIB_NAME}
-    PRIVATE thread_pool.cc
+    PRIVATE
+        thread_pool.cc
+        work.cc
+        queue.cc
 )
 
