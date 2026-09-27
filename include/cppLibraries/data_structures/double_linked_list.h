@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <optional>
+#include <utility>
 
 namespace cppLibraries { namespace dataStructure {
 
@@ -32,6 +33,10 @@ namespace cppLibraries { namespace dataStructure {
 
             void PushFront(const T& data);
             void PushBack(const T& data);
+
+            // moveable overloads
+            void PushFront(T&& data);
+            void PushBack(T&& data);
 
             std::optional<T> PopFront();
             std::optional<T> PopBack();
@@ -81,7 +86,7 @@ template <typename T> ds::DoubleLinkedList<T>& ds::DoubleLinkedList<T>::operator
     Node* tmpptr = this->m_head;
 
     while (tmpptr != nullptr) {
-        this->m_head = m_head->m_next;
+        this->m_head = this->m_head->m_next;
         delete (tmpptr);
         tmpptr = this->m_head;
     }
@@ -120,7 +125,7 @@ template <typename T> ds::DoubleLinkedList<T>& ds::DoubleLinkedList<T>::operator
     Node* tmpptr = this->m_head;
 
     while (tmpptr != nullptr) {
-        this->m_head = m_head->m_next;
+        this->m_head = this->m_head->m_next;
         delete (tmpptr);
         tmpptr = this->m_head;
     }
@@ -160,6 +165,48 @@ template <typename T> void ds::DoubleLinkedList<T>::PushFront(const T& data) {
 template <typename T> void ds::DoubleLinkedList<T>::PushBack(const T& data) {
 
     Node* tmpptr = new Node{data};
+
+    // first node
+    if(m_head == nullptr) {
+        m_head = tmpptr;
+        m_tail = tmpptr;
+        tmpptr->m_next = nullptr;
+        tmpptr->m_prev = nullptr;
+    }
+    else {
+        m_tail->m_next = tmpptr;
+        tmpptr->m_next = nullptr;
+        tmpptr->m_prev = m_tail;
+        m_tail = tmpptr;
+    }
+
+    m_length++;
+}
+
+template <typename T> void ds::DoubleLinkedList<T>::PushFront(T&& data) {
+    
+    Node* tmpptr = new Node{std::move(data)};
+
+    // first node
+    if(m_head == nullptr) {
+        m_head = tmpptr;
+        m_tail = tmpptr;
+        tmpptr->m_next = nullptr;
+        tmpptr->m_prev = nullptr;
+    }
+    else {
+        tmpptr->m_next = m_head;
+        tmpptr->m_prev = nullptr;
+        m_head->m_prev = tmpptr;
+        m_head = tmpptr;
+    }
+
+    m_length++;
+}
+
+template <typename T> void ds::DoubleLinkedList<T>::PushBack(T&& data) {
+
+    Node* tmpptr = new Node{std::move(data)};
 
     // first node
     if(m_head == nullptr) {
