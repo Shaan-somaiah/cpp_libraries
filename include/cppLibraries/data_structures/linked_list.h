@@ -224,7 +224,7 @@ template <typename T> std::optional<T> ds::LinkedList<T>::PopFront() {
         return std::nullopt;
     }
 
-    T data = m_head->m_data;
+    T data = std::move(m_head->m_data);
     Node* tmpptr = m_head;
     m_head = m_head->m_next;
 
@@ -248,7 +248,7 @@ template <typename T> std::optional<T> ds::LinkedList<T>::PopBack() {
 
     // single node list
     if (m_head == m_tail) {
-        T data = m_head->m_data;
+        T data = std::move(m_head->m_data);
         delete (m_head);
         m_head = nullptr;
         m_tail = nullptr;
@@ -264,7 +264,7 @@ template <typename T> std::optional<T> ds::LinkedList<T>::PopBack() {
         tmpptr = tmpptr->m_next;
     }
 
-    T data = m_tail->m_data;
+    T data = std::move(m_tail->m_data);
     m_tail = tmpptr;
     tmpptr = tmpptr->m_next;
     m_tail->m_next = nullptr;

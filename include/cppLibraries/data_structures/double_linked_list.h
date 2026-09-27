@@ -232,7 +232,7 @@ template <typename T> std::optional<T> ds::DoubleLinkedList<T>::PopFront() {
         return std::nullopt;
     }
     
-    T data  = m_head->m_data;
+    T data  = std::move(m_head->m_data);
     Node* tmpptr = m_head;
 
     // Handle single node
@@ -260,7 +260,7 @@ template <typename T> std::optional<T> ds::DoubleLinkedList<T>::PopBack() {
         return std::nullopt;
     }
     
-    T data  = m_tail->m_data;
+    T data  = std::move(m_tail->m_data);
     Node* tmpptr = m_tail;
 
     // Handle single node
