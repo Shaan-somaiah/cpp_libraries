@@ -9,11 +9,10 @@ void test() {
 
 int main() {
 
-    // cppLibraries::ThreadPool t_pool(5);
+    cppLibraries::ThreadPool t_pool(5);
 
-    // t_pool.Add(&test);
+    t_pool.Add(&test);
 
-    // t_pool.TestExec();
-
+    t_pool.TestExec();
 
 }
