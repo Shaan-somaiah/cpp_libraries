@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <optional>
+#include <utility>
 
 namespace cppLibraries { namespace dataStructure {
 
@@ -31,6 +32,10 @@ namespace cppLibraries { namespace dataStructure {
 
                 void PushFront(const T& data);
                 void PushBack(const T& data);
+
+                // moveable overloads
+                void PushFront(T&& data);
+                void PushBack(T&& data);
 
                 std::optional<T> PopFront();
                 std::optional<T> PopBack();
@@ -159,6 +164,43 @@ template <typename T> void ds::LinkedList<T>::PushFront(const T& data) {
 template <typename T> void ds::LinkedList<T>::PushBack(const T& data) {
     
     Node* node = new Node{data};
+
+    // first node addition
+    if(m_head == nullptr) {
+        node->m_next = nullptr;
+        m_head = node;
+        m_tail = node;
+    }
+    else {
+        node->m_next = nullptr;
+        m_tail->m_next = node;
+        m_tail = node;
+    }
+
+    m_length++;
+}
+
+template <typename T> void ds::LinkedList<T>::PushFront(T&& data) {
+
+    Node* node = new Node{std::move(data)};
+
+    // first node addition
+    if(m_head == nullptr) {
+        node->m_next = nullptr;
+        m_head = node;
+        m_tail = node;
+    }
+    else {
+        node->m_next = m_head;
+        m_head = node;
+    }
+
+    m_length++;
+}
+
+template <typename T> void ds::LinkedList<T>::PushBack(T&& data) {
+    
+    Node* node = new Node{std::move(data)};
 
     // first node addition
     if(m_head == nullptr) {
