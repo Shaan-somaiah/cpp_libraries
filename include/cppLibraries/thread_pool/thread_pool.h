@@ -3,6 +3,7 @@
 
 #include <cstddef>
 #include <functional>
+#include <utility>
 
 namespace cppLibraries {
 
@@ -22,8 +23,14 @@ namespace cppLibraries {
             // todo: Generalise the callable to support different return types and arguments
             void Add(std::function<void()> callable);
 
-            void TestExec();
-
+            template <typename F, typename... Args> 
+            auto TestExec(F&& f,Args&&... args)
+            {
+                return std::invoke(
+                    std::move(f),
+                    std::move(args)...
+                );
+            }
     }; 
 
 } // namespace cppLibraries
