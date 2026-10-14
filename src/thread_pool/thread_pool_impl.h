@@ -21,7 +21,7 @@ namespace cppLibraries {
         public:
             Impl(size_t worker_count); 
 
-            void Add(std::function<void()> m_callable);
+            void Add(std::function<void()> callable);
 
             void TestExec();
     };

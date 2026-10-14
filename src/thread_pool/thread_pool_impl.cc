@@ -14,9 +14,9 @@ namespace cppLibraries {
 
     }
 
-    void ThreadPool::Impl::Add(std::function<void()> m_callable) {
+    void ThreadPool::Impl::Add(std::function<void()> callable) {
         
-        Work work{m_callable,1,1};
+        Work work{callable,1,1};
 
         m_queue.Push(work);
     }
