@@ -43,6 +43,8 @@ int main () {
     };
 
     std::function<TestClass(TestClass)> class_cb = [](const TestClass& tc) {
+
+        std::cout << "Inside class_cb\n";
         TestClass new_test = tc;
 
         new_test.a = 10;
@@ -55,14 +57,18 @@ int main () {
 
     TestClass tc{5,6};
 
-    tp.TestExec(std::move(void_cb));
+    tp.Add(std::move(void_cb));
 
-    auto int_cb_retval = tp.TestExec(int_cb,5,10);
+    tp.Add(int_cb,5,10);
 
-    std::cout << "int_cb_retval : " << int_cb_retval << "\nType : " << typeid(int_cb_retval).name() << "\n";
+    tp.Add(class_cb,tc);
 
-    auto class_cb_retval = tp.TestExec(class_cb,tc);
 
-    std::cout << "class_cb_retval : " << class_cb_retval.a  << "\nType : " << typeid(class_cb_retval).name() << "\n";
+    tp.TestExec();
+    tp.TestExec();
+    tp.TestExec();
+    tp.TestExec();
+    tp.TestExec();
+    tp.TestExec();
 
 }

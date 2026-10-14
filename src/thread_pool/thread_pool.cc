@@ -16,14 +16,12 @@ namespace cppLibraries {
         delete m_impl;
     }
 
-    void ThreadPool::Add(std::function<void()> callable) {
-
-        // Wrap the callable in non template type and invoke implementation specific Add()
-        m_impl->Add(callable);
+    void ThreadPool::AddImpl(std::function<void()> cb) {
+        m_impl->Add(cb);
     }
 
-    // void ThreadPool::TestExec() {
-    //     m_impl->TestExec();
-    // }
+    void ThreadPool::TestExec() {
+        m_impl->TestExec();
+    }
     
 } // namespace cppLibraries

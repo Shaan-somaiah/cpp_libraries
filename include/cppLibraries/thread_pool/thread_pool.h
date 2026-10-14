@@ -9,10 +9,17 @@ namespace cppLibraries {
 
     class ThreadPool {
 
-        // Pointer to implementation, do not want to expose any more details to consumer
         private:
+
+            // Forward declare internal implementation
+            // Done to hide internally implementation from consumer
             class Impl;
             Impl* m_impl;
+
+            // Private wrapper to call m_impl->Add(cb)
+            // Since m_impl is only forward declared above, I cannot call m_impl->Add(cb) 
+            // directly within templated Add()
+            void AddImpl(std::function<void()> callable);
     
         
         public:
@@ -20,17 +27,21 @@ namespace cppLibraries {
             ~ThreadPool();
 
             // Public API to submit work to ThreadPool, takes in any callable
-            // todo: Generalise the callable to support different return types and arguments
-            void Add(std::function<void()> callable);
+            // Ignoring return types for now, I can generalise any callable to a std::function<void()> by 
+            // wrapping it in a lamda
+            // Todo: Will work on returning a future of the correct type
+            template <typename Callable, typename... Args>
+            auto Add(Callable&& callable, Args&&... args) { 
 
-            template <typename F, typename... Args> 
-            auto TestExec(F&& f,Args&&... args)
-            {
-                return std::invoke(
-                    std::move(f),
-                    std::move(args)...
-                );
+                std::function<void()> callable_ = [callable, args...]() {
+                    callable(args...);
+                };
+
+                AddImpl(callable_);
             }
+
+            // testing only
+            void TestExec();
     }; 
 
 } // namespace cppLibraries
